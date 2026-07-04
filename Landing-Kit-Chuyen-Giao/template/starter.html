@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>[Tên sự kiện] — [Lời hứa lớn nhất]</title>
+<meta name="description" content="[1 câu: kết quả cho ai, khi nào, bằng cách nào]" />
+
+<!-- FONT: Be Vietnam Pro (body, có dấu) + Newsreader (display serif, có cả italic).
+     Đổi display sang Oswald nếu muốn kiểu condensed bold (xem DESIGN.md) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   PRESET CHỦ ĐẠO — "DR MAGENTA" (chữ ký của anh: webinar / bootcamp / 10X)
+   Hai tông sáng–tối xen kẽ, magenta là accent tuyệt đối.
+   Đổi --accent sang #EB1696 (webinar) hoặc #CE2462 (bootcamp) tuỳ ý.
+   ============================================================ */
+:root{
+  --dark:#0A0A0A;        /* nền tối: hero, ribbon, footer, các section tối */
+  --dark-2:#131319;      /* card trên nền tối */
+  --light:#F4F3F1;       /* nền sáng: section nội dung */
+  --light-2:#FFFFFF;     /* card trên nền sáng */
+  --accent:#D73672;      /* MAGENTA — chữ ký */
+  --accent-2:#FF5DC6;    /* magenta sáng (gradient/hover) */
+  --accent-soft:rgba(215,54,114,.10);
+  --accent-line:rgba(215,54,114,.30);
+
+  --ink:#0A0A0A;         /* chữ trên nền sáng */
+  --ink-soft:#4A4A4A;
+  --ink-mute:#8A8A8A;
+  --on-dark:#FFFFFF;     /* chữ trên nền tối */
+  --on-dark-soft:rgba(255,255,255,.72);
+  --on-dark-mute:rgba(255,255,255,.50);
+  --line-light:#D9D6D1;
+  --line-dark:rgba(255,255,255,.14);
+
+  --font-body:"Be Vietnam Pro",-apple-system,system-ui,sans-serif;
+  --font-display:"Newsreader",Georgia,serif;   /* hoặc "Oswald",sans-serif */
+
+  --h1: clamp(40px, 8vw, 96px);
+  --h2: clamp(28px, 4.4vw, 56px);
+  --h3: clamp(19px, 1.8vw, 24px);
+  --lead: clamp(16px, 1.4vw, 18.5px);
+
+  --maxw:1180px;
+  --pad-x:clamp(20px,4vw,44px);
+  --pad-y:clamp(76px,10vw,128px);
+  --radius:16px;
+  --pill:100px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--light);color:var(--ink);font-family:var(--font-body);
+  font-size:var(--lead);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad-x)}
+section{padding:var(--pad-y) 0}
+.sec-dark{background:var(--dark);color:var(--on-dark)}
+.sec-dark h1,.sec-dark h2,.sec-dark h3{color:var(--on-dark)}
+img{max-width:100%;display:block}
+
+/* CHỮ */
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.1;letter-spacing:-.01em}
+h1{font-size:var(--h1);line-height:1.04}
+h2{font-size:var(--h2)}
+h3{font-size:var(--h3);font-family:var(--font-body);font-weight:700;letter-spacing:0}
+.lead{font-size:var(--lead);color:var(--ink-soft);max-width:56ch}
+.sec-dark .lead{color:var(--on-dark-soft)}
+em{font-style:italic;color:var(--accent);font-weight:500}
+
+/* EYEBROW — chữ ký: ★ in hoa giãn chữ */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;color:var(--accent);margin-bottom:18px}
+.eyebrow::before{content:"★";font-size:11px}
+
+/* NÚT — pill + glow magenta + lift hover */
+.btn{display:inline-block;font-family:var(--font-body);font-weight:700;font-size:15px;
+  letter-spacing:.01em;padding:16px 30px;border-radius:var(--pill);text-decoration:none;cursor:pointer;
+  background:var(--accent);color:#fff;border:1px solid var(--accent);
+  box-shadow:0 14px 38px -14px rgba(215,54,114,.8);transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:var(--accent-2);box-shadow:0 20px 46px -14px rgba(215,54,114,.9)}
+.btn-ghost{background:transparent;box-shadow:none;color:var(--on-dark);border:1px solid var(--line-dark)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);transform:translateY(-2px)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:32px}
+.micro{font-size:13px;color:var(--ink-mute)}
+.sec-dark .micro{color:var(--on-dark-mute)}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-dark)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad-x)}
+.brand{font-family:var(--font-display);font-weight:600;font-size:21px;color:var(--on-dark)}
+.nav .btn{padding:11px 22px;font-size:13px}
+
+/* HERO — tối, aurora glow, căn giữa (kiểu optin) */
+.hero{position:relative;overflow:hidden;background:var(--dark);color:var(--on-dark);text-align:center;
+  padding:clamp(72px,9vw,120px) 0 clamp(64px,8vw,104px)}
+.hero .wrap{position:relative;z-index:1;max-width:940px}
+.hero h1{margin:18px auto 0;max-width:18ch}
+.hero .lead{margin:26px auto 0;max-width:60ch;color:var(--on-dark-soft);text-align:center}
+.hero .cta-row{justify-content:center}
+.aurora{position:absolute;inset:0;z-index:0;pointer-events:none}
+.aurora::before,.aurora::after{content:"";position:absolute;width:46vw;height:46vw;border-radius:50%;
+  filter:blur(140px);opacity:.32}
+.aurora::before{background:var(--accent);top:-12%;left:-8%;animation:drift1 28s ease-in-out infinite}
+.aurora::after{background:#6F2FD6;bottom:-14%;right:-10%;animation:drift2 36s ease-in-out infinite}
+@keyframes drift1{50%{transform:translate(8%,10%) scale(1.1)}}
+@keyframes drift2{50%{transform:translate(-8%,-8%) scale(1.15)}}
+/* dải meta dưới hero */
+.hero-meta{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:34px;
+  font-size:14px;color:var(--on-dark-soft)}
+.hero-meta b{color:var(--on-dark);font-weight:700}
+/* badge pulsing */
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;
+  font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  padding:7px 15px;border-radius:var(--pill)}
+.dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.4}}
+
+/* RIBBON — chữ ký: ticker magenta chạy ngang */
+.ribbon{background:var(--accent);color:#fff;overflow:hidden;padding:13px 0;white-space:nowrap}
+.ribbon-track{display:inline-flex;gap:48px;animation:scroll-x 34s linear infinite;font-weight:700;
+  font-size:14px;letter-spacing:.02em}
+.ribbon-track span::after{content:"✦";margin-left:48px;opacity:.7}
+@keyframes scroll-x{to{transform:translateX(-50%)}}
+
+/* OPTIN — 2 cột: lợi ích trái, form phải */
+.optin{background:var(--light)}
+.optin-grid{display:grid;gap:clamp(28px,4vw,56px);align-items:start}
+@media(min-width:880px){.optin-grid{grid-template-columns:1fr 1fr}}
+.checklist{list-style:none;margin-top:24px;display:grid;gap:16px}
+.checklist li{display:flex;gap:13px;align-items:flex-start;font-size:16px}
+.checklist li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:13px;font-weight:800;
+  display:grid;place-items:center;margin-top:1px}
+/* form card — viền + dải magenta trên */
+.form-card{background:var(--light-2);border:2px solid var(--ink);border-radius:20px;
+  padding:clamp(24px,3vw,36px);box-shadow:8px 8px 0 var(--accent);position:relative}
+.form-card h3{font-size:24px;margin-bottom:6px}
+.form-card .micro{margin-bottom:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink-soft)}
+.field input,.field select{width:100%;padding:13px 15px;border:1.5px solid var(--line-light);
+  border-radius:10px;font-family:inherit;font-size:15px;background:#fff;color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft)}
+.form-card .btn{width:100%;text-align:center;margin-top:8px;padding:17px}
+
+/* COUNTDOWN — chữ ký: 4 ô đếm ngược */
+.countdown{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.cd-cell{background:var(--dark-2);border:1px solid var(--line-dark);border-radius:var(--radius);
+  padding:18px 22px;min-width:92px;text-align:center;position:relative;overflow:hidden}
+.cd-cell::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--accent-soft),transparent 60%)}
+.cd-num{position:relative;font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:600;color:#fff;line-height:1}
+.cd-lab{position:relative;display:block;margin-top:6px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--on-dark-mute)}
+
+/* MODULES — section đánh số 01–04 */
+.modules{display:grid;gap:1px;background:var(--line-light);border:1px solid var(--line-light);
+  border-radius:var(--radius);overflow:hidden;margin-top:40px}
+@media(min-width:760px){.modules{grid-template-columns:1fr 1fr}}
+.module{background:var(--light);padding:clamp(24px,3vw,36px)}
+.module .n{font-family:var(--font-display);font-size:40px;font-weight:600;color:var(--accent);line-height:1}
+.module h3{margin:12px 0 8px}
+.module p{color:var(--ink-soft);font-size:16px;max-width:48ch}
+
+/* TESTIMONIAL — quote lớn */
+.quote{border-left:3px solid var(--accent);padding-left:clamp(20px,3vw,36px);margin-top:28px}
+.quote blockquote{font-family:var(--font-display);font-size:var(--h2);line-height:1.25;font-weight:500}
+.sec-dark .quote blockquote{color:var(--on-dark)}
+.quote cite{display:block;margin-top:20px;font-style:normal;font-size:14px;color:var(--ink-mute);font-weight:600}
+.sec-dark .quote cite{color:var(--on-dark-mute)}
+
+/* FAQ */
+.faq details{border-bottom:1px solid var(--line-light);padding:20px 0}
+.faq summary{font-family:var(--font-body);font-weight:600;font-size:18px;cursor:pointer;
+  list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-weight:700}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:12px;color:var(--ink-soft)}
+
+/* FINAL CTA — tối, thở rộng */
+.final{background:var(--dark);color:var(--on-dark);text-align:center}
+.final .wrap{max-width:820px}
+.final h2{margin-top:14px}
+.final .lead{margin:22px auto 0;text-align:center}
+.final .cta-row{justify-content:center}
+
+/* FOOTER */
+footer{background:var(--dark);color:var(--on-dark-mute);border-top:1px solid var(--line-dark);
+  padding:32px 0;font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* STICKY BAR đáy (hiện khi cuộn) */
+.sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,10,10,.95);
+  backdrop-filter:blur(10px);border-top:1px solid var(--line-dark);transform:translateY(110%);
+  transition:transform .3s;padding:12px var(--pad-x)}
+.sticky-bar.show{transform:none}
+.sticky-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0;max-width:var(--maxw)}
+.sticky-bar .s-t{color:var(--on-dark);font-weight:700;font-size:15px}
+.sticky-bar .s-t span{display:block;font-size:12px;color:var(--accent);font-weight:600}
+.sticky-bar .btn{padding:12px 24px;font-size:14px}
+@media(max-width:560px){.sticky-bar .s-t span{display:none}}
+
+/* SECTION HEAD */
+.sec-head{max-width:62ch;margin-bottom:8px}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">[Tên thương hiệu]</div>
+    <a href="#dang-ky" class="btn">[Giữ chỗ →]</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="aurora"></div>
+  <div class="wrap">
+    <h1>[Lời hứa lớn nhất, nhấn <em>từ khoá</em> bằng màu]</h1>
+    <p class="lead">[1 câu làm rõ: cho ai, học/nhận được gì, vì sao nên dự.]</p>
+    <div class="cta-row"><a href="#dang-ky" class="btn">[Đăng ký giữ chỗ →]</a></div>
+    <div class="hero-meta">
+      <span>🕗 <b>[20:00, Thứ 5]</b></span>
+      <span>💻 <b>[Online qua Zoom]</b></span>
+      <span>🎁 <b>[Miễn phí]</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- RIBBON -->
+<div class="ribbon"><div class="ribbon-track">
+  <span>[Thông điệp 1]</span><span>[Thông điệp 2]</span><span>[Thông điệp 3]</span><span>[Thông điệp 4]</span>
+  <span>[Thông điệp 1]</span><span>[Thông điệp 2]</span><span>[Thông điệp 3]</span><span>[Thông điệp 4]</span>
+</div></div>
+
+<!-- OPTIN: lợi ích + form -->
+<section class="optin" id="dang-ky">
+  <div class="wrap optin-grid">
+    <div class="reveal">
+      <span class="eyebrow">Bạn sẽ nhận được</span>
+      <h2>[Tiêu đề: kết quả họ có sau buổi học]</h2>
+      <ul class="checklist">
+        <li>[Lợi ích cụ thể 1 — có số nếu được]</li>
+        <li>[Lợi ích cụ thể 2]</li>
+        <li>[Lợi ích cụ thể 3]</li>
+        <li>[Lợi ích cụ thể 4]</li>
+        <li>[Lợi ích cụ thể 5]</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <form class="form-card" action="[LINK_NHAN_LEAD]" method="POST">
+        <h3>[Đăng ký giữ chỗ]</h3>
+        <p class="micro">[Còn 12 suất · đóng cổng 22/06]</p>
+        <div class="field"><label>Họ và tên</label><input name="name" required placeholder="Nguyễn Văn A" /></div>
+        <div class="field"><label>Email</label><input name="email" type="email" required placeholder="ban@email.com" /></div>
+        <div class="field"><label>Số điện thoại</label><input name="phone" required placeholder="09xx xxx xxx" /></div>
+        <div class="field"><label>[Ngành / lĩnh vực]</label>
+          <select name="industry"><option value="">— Chọn —</option><option>[Lựa chọn 1]</option><option>[Lựa chọn 2]</option></select>
+        </div>
+        <button class="btn" type="submit">[Giữ chỗ ngay →]</button>
+        <p class="micro" style="margin-top:12px;text-align:center">🔒 Thông tin được bảo mật. Không spam.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="sec-dark" style="text-align:center">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">Khai mạc sau</span>
+    <div class="countdown">
+      <div class="cd-cell"><span class="cd-num" id="cd-d">00</span><span class="cd-lab">Ngày</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-h">00</span><span class="cd-lab">Giờ</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-m">00</span><span class="cd-lab">Phút</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-s">00</span><span class="cd-lab">Giây</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VẤN ĐỀ + MODULES -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Nội dung buổi học</span>
+      <h2>[Tên chương trình — 4 phần / 4 buổi]</h2>
+    </div>
+    <p class="lead">[1-2 câu dẫn: cơ chế khác biệt, vì sao cách này chạy được.]</p>
+    <div class="modules">
+      <div class="module"><div class="n">01</div><h3>[Phần 1]</h3><p>[1-2 dòng cụ thể.]</p></div>
+      <div class="module"><div class="n">02</div><h3>[Phần 2]</h3><p>[1-2 dòng cụ thể.]</p></div>
+      <div class="module"><div class="n">03</div><h3>[Phần 3]</h3><p>[1-2 dòng cụ thể.]</p></div>
+      <div class="module"><div class="n">04</div><h3>[Phần 4]</h3><p>[1-2 dòng cụ thể.]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL (dark) -->
+<section class="sec-dark reveal">
+  <div class="wrap">
+    <span class="eyebrow">Cảm nhận</span>
+    <div class="quote">
+      <blockquote>“[Trích dẫn mạnh nhất — có kết quả cụ thể. Điền thật, đừng bịa.]”</blockquote>
+      <cite>[Tên thật] — [Vai trò / công ty]</cite>
+    </div>
+  </div>
+</section>
+
+<!-- VỀ DIỄN GIẢ -->
+<section class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">Người dẫn buổi học</span>
+    <h2>[Tên diễn giả]</h2>
+    <p class="lead" style="margin-top:18px">[Tiểu sử ngắn: thành tựu có số, lý do đáng nghe. 2-3 câu.]</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="reveal" style="background:var(--light-2)">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Hỏi đáp</span><h2>Câu hỏi thường gặp</h2></div>
+    <div class="faq">
+      <details><summary>[Câu hỏi / phản đối 1?]</summary><p>[Trả lời thẳng.]</p></details>
+      <details><summary>[Câu hỏi / phản đối 2?]</summary><p>[Trả lời thẳng.]</p></details>
+      <details><summary>[Câu hỏi / phản đối 3?]</summary><p>[Trả lời thẳng.]</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final reveal">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">Đừng bỏ lỡ</span>
+    <h2>[Nhắc lại lời hứa lớn + lý do hành động ngay]</h2>
+    <p class="lead">[1 câu chốt.]</p>
+    <div class="cta-row"><a href="#dang-ky" class="btn">[Giữ chỗ miễn phí →]</a></div>
+    <p class="micro" style="margin-top:16px">[Còn 12 suất · đóng cổng 22/06]</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <span>© [Năm] [Tên thương hiệu]</span>
+    <span>[email · sđt · zalo]</span>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="sticky">
+  <div class="wrap">
+    <div class="s-t">[Tên sự kiện]<span>[20:00 · Thứ 5 · Miễn phí]</span></div>
+    <a href="#dang-ky" class="btn">[Giữ chỗ →]</a>
+  </div>
+</div>
+
+<script>
+// Scroll reveal
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Sticky bar hiện sau khi qua hero
+const sticky=document.getElementById('sticky');
+addEventListener('scroll',()=>{sticky.classList.toggle('show',scrollY>window.innerHeight*0.9)});
+
+// Countdown — đổi ngày mục tiêu ở đây
+const TARGET=new Date('2026-06-22T20:00:00+07:00').getTime();
+const p=n=>String(n).padStart(2,'0');
+setInterval(()=>{
+  let d=TARGET-Date.now(); if(d<0)d=0;
+  document.getElementById('cd-d').textContent=p(Math.floor(d/864e5));
+  document.getElementById('cd-h').textContent=p(Math.floor(d/36e5)%24);
+  document.getElementById('cd-m').textContent=p(Math.floor(d/6e4)%60);
+  document.getElementById('cd-s').textContent=p(Math.floor(d/1e3)%60);
+},1000);
+</script>
+</body>
+</html>
